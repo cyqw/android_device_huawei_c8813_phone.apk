@@ -123,7 +123,19 @@
     return-void
 .end method
 
-.method static synthetic access$000(Lcom/android/phone/InCallTouchUi;)Z
+.method static synthetic access$002(Lcom/android/phone/InCallTouchUi;Z)Z
+    .registers 2
+    .parameter "x0"
+    .parameter "x1"
+
+    .prologue
+    .line 86
+    iput-boolean p1, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetIsFadingOut:Z
+
+    return p1
+.end method
+
+.method static synthetic access$100(Lcom/android/phone/InCallTouchUi;)Z
     .registers 2
     .parameter "x0"
 
@@ -134,7 +146,7 @@
     return v0
 .end method
 
-.method static synthetic access$002(Lcom/android/phone/InCallTouchUi;Z)Z
+.method static synthetic access$102(Lcom/android/phone/InCallTouchUi;Z)Z
     .registers 2
     .parameter "x0"
     .parameter "x1"
@@ -146,7 +158,7 @@
     return p1
 .end method
 
-.method static synthetic access$100(Lcom/android/phone/InCallTouchUi;)Lcom/android/phone/PhoneApp;
+.method static synthetic access$200(Lcom/android/phone/InCallTouchUi;)Lcom/android/phone/PhoneApp;
     .registers 2
     .parameter "x0"
 
@@ -157,7 +169,7 @@
     return-object v0
 .end method
 
-.method static synthetic access$200(Lcom/android/phone/InCallTouchUi;Lcom/android/internal/telephony/CallManager;)V
+.method static synthetic access$300(Lcom/android/phone/InCallTouchUi;Lcom/android/internal/telephony/CallManager;)V
     .registers 2
     .parameter "x0"
     .parameter "x1"
@@ -169,7 +181,7 @@
     return-void
 .end method
 
-.method static synthetic access$300(Lcom/android/phone/InCallTouchUi;)Landroid/view/View;
+.method static synthetic access$400(Lcom/android/phone/InCallTouchUi;)Landroid/view/View;
     .registers 2
     .parameter "x0"
 
@@ -180,7 +192,7 @@
     return-object v0
 .end method
 
-.method static synthetic access$400(Lcom/android/phone/InCallTouchUi;)Lcom/android/phone/multiwaveview/GlowPadView;
+.method static synthetic access$500(Lcom/android/phone/InCallTouchUi;)Lcom/android/phone/multiwaveview/GlowPadView;
     .registers 2
     .parameter "x0"
 
@@ -189,18 +201,6 @@
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     return-object v0
-.end method
-
-.method static synthetic access$502(Lcom/android/phone/InCallTouchUi;Z)Z
-    .registers 2
-    .parameter "x0"
-    .parameter "x1"
-
-    .prologue
-    .line 86
-    iput-boolean p1, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetIsFadingOut:Z
-
-    return p1
 .end method
 
 .method static synthetic access$602(Lcom/android/phone/InCallTouchUi;Z)Z
@@ -237,41 +237,36 @@
 
     if-eqz v2, :cond_e
 
-    .line 1458
+    .line 1460
     :cond_d
     :goto_d
     return-void
 
     .line 1417
     :cond_e
-    const/4 v2, 0x1
-
-    iput-boolean v2, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetIsFadingOut:Z
-
-    .line 1418
     iget-object v2, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v2}, Lcom/android/phone/multiwaveview/GlowPadView;->animate()Landroid/view/ViewPropertyAnimator;
 
     move-result-object v0
 
-    .line 1419
+    .line 1418
     .local v0, animator:Landroid/view/ViewPropertyAnimator;
     invoke-virtual {v0}, Landroid/view/ViewPropertyAnimator;->cancel()V
 
-    .line 1420
+    .line 1419
     const-wide/16 v2, 0xfa
 
     invoke-virtual {v0, v2, v3}, Landroid/view/ViewPropertyAnimator;->setDuration(J)Landroid/view/ViewPropertyAnimator;
 
-    .line 1421
+    .line 1420
     new-instance v2, Lcom/android/phone/InCallTouchUi$3;
 
     invoke-direct {v2, p0, v1}, Lcom/android/phone/InCallTouchUi$3;-><init>(Lcom/android/phone/InCallTouchUi;I)V
 
     invoke-virtual {v0, v2}, Landroid/view/ViewPropertyAnimator;->setListener(Landroid/animation/Animator$AnimatorListener;)Landroid/view/ViewPropertyAnimator;
 
-    .line 1457
+    .line 1459
     const/4 v2, 0x0
 
     invoke-virtual {v0, v2}, Landroid/view/ViewPropertyAnimator;->alpha(F)Landroid/view/ViewPropertyAnimator;
@@ -284,12 +279,12 @@
     .parameter "msg"
 
     .prologue
-    .line 1676
+    .line 1680
     const-string v0, "InCallTouchUi"
 
     invoke-static {v0, p1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1677
+    .line 1681
     return-void
 .end method
 
@@ -520,36 +515,43 @@
 .end method
 
 .method private showIncomingCallWidget(Lcom/android/internal/telephony/Call;)V
-    .registers 7
+    .registers 8
     .parameter
 
     .prologue
-    const/16 v4, 0x65
+    const/16 v5, 0x65
+
+    const/4 v4, 0x1
 
     const/4 v3, 0x0
 
-    .line 1470
+    .line 1472
+    iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
+
+    invoke-virtual {v0, v4}, Lcom/android/phone/multiwaveview/GlowPadView;->setTargetsFirstTriggerStatus(Z)V
+
+    .line 1474
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v0}, Lcom/android/phone/multiwaveview/GlowPadView;->animate()Landroid/view/ViewPropertyAnimator;
 
     move-result-object v0
 
-    .line 1471
-    if-eqz v0, :cond_e
+    .line 1475
+    if-eqz v0, :cond_14
 
-    .line 1472
+    .line 1476
     invoke-virtual {v0}, Landroid/view/ViewPropertyAnimator;->cancel()V
 
-    .line 1474
-    :cond_e
+    .line 1478
+    :cond_14
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     const/high16 v1, 0x3f80
 
     invoke-virtual {v0, v1}, Lcom/android/phone/multiwaveview/GlowPadView;->setAlpha(F)V
 
-    .line 1481
+    .line 1485
     invoke-virtual {p0}, Lcom/android/phone/InCallTouchUi;->getUiScreen()Landroid/app/Activity;
 
     move-result-object v0
@@ -558,116 +560,114 @@
 
     move-result v1
 
-    .line 1484
-    if-eqz v1, :cond_66
+    .line 1488
+    if-eqz v1, :cond_6b
 
     const v0, 0x7f080007
 
-    .line 1490
-    :goto_22
+    .line 1494
+    :goto_28
     iget-object v2, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v2}, Lcom/android/phone/multiwaveview/GlowPadView;->getTargetResourceId()I
 
     move-result v2
 
-    if-eq v0, v2, :cond_44
+    if-eq v0, v2, :cond_49
 
-    .line 1491
-    if-eqz v1, :cond_6a
+    .line 1495
+    if-eqz v1, :cond_6f
 
-    .line 1494
+    .line 1498
     iget-object v1, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v1, v0}, Lcom/android/phone/multiwaveview/GlowPadView;->setTargetResources(I)V
 
-    .line 1495
+    .line 1499
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     const v1, 0x7f080008
 
     invoke-virtual {v0, v1}, Lcom/android/phone/multiwaveview/GlowPadView;->setTargetDescriptionsResourceId(I)V
 
-    .line 1497
+    .line 1501
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     const v1, 0x7f080009
 
     invoke-virtual {v0, v1}, Lcom/android/phone/multiwaveview/GlowPadView;->setDirectionDescriptionsResourceId(I)V
 
-    .line 1509
-    :goto_41
-    const/4 v0, 0x1
+    .line 1513
+    :goto_47
+    iput-boolean v4, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetShouldBeReset:Z
 
-    iput-boolean v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetShouldBeReset:Z
-
-    .line 1511
-    :cond_44
+    .line 1515
+    :cond_49
     iget-boolean v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetShouldBeReset:Z
 
-    if-eqz v0, :cond_54
+    if-eqz v0, :cond_59
 
-    .line 1516
+    .line 1520
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v0, v3}, Lcom/android/phone/multiwaveview/GlowPadView;->reset(Z)V
 
-    .line 1518
+    .line 1522
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v0}, Lcom/android/phone/multiwaveview/GlowPadView;->init()V
 
-    .line 1520
+    .line 1524
     iput-boolean v3, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidgetShouldBeReset:Z
 
-    .line 1523
-    :cond_54
+    .line 1527
+    :cond_59
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v0, v3}, Lcom/android/phone/multiwaveview/GlowPadView;->setVisibility(I)V
 
-    .line 1535
+    .line 1539
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mHandler:Landroid/os/Handler;
 
-    invoke-virtual {v0, v4}, Landroid/os/Handler;->removeMessages(I)V
+    invoke-virtual {v0, v5}, Landroid/os/Handler;->removeMessages(I)V
 
-    .line 1536
+    .line 1540
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mHandler:Landroid/os/Handler;
 
     const-wide/16 v1, 0xfa
 
-    invoke-virtual {v0, v4, v1, v2}, Landroid/os/Handler;->sendEmptyMessageDelayed(IJ)Z
+    invoke-virtual {v0, v5, v1, v2}, Landroid/os/Handler;->sendEmptyMessageDelayed(IJ)Z
 
-    .line 1543
+    .line 1547
     return-void
 
-    .line 1484
-    :cond_66
+    .line 1488
+    :cond_6b
     const v0, 0x7f08000a
 
-    goto :goto_22
+    goto :goto_28
 
-    .line 1501
-    :cond_6a
+    .line 1505
+    :cond_6f
     iget-object v1, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v1, v0}, Lcom/android/phone/multiwaveview/GlowPadView;->setTargetResources(I)V
 
-    .line 1502
+    .line 1506
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     const v1, 0x7f08000b
 
     invoke-virtual {v0, v1}, Lcom/android/phone/multiwaveview/GlowPadView;->setTargetDescriptionsResourceId(I)V
 
-    .line 1504
+    .line 1508
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     const v1, 0x7f08000c
 
     invoke-virtual {v0, v1}, Lcom/android/phone/multiwaveview/GlowPadView;->setDirectionDescriptionsResourceId(I)V
 
-    goto :goto_41
+    goto :goto_47
 .end method
 
 .method private updateAudioButton(Lcom/android/phone/InCallControlState;)V
@@ -1766,7 +1766,7 @@
     .end annotation
 
     .prologue
-    .line 1697
+    .line 1701
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mInCallScreen:Lcom/android/phone/InCallScreen;
 
     return-object v0
@@ -1776,7 +1776,7 @@
     .registers 2
 
     .prologue
-    .line 1689
+    .line 1693
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mInCallScreen:Lcom/android/phone/InCallScreen;
 
     invoke-virtual {v0}, Lcom/android/phone/InCallScreen;->getUpdatedInCallControlState()Lcom/android/phone/InCallControlState;
@@ -1820,12 +1820,12 @@
     .parameter "id"
 
     .prologue
-    .line 1681
+    .line 1685
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mInCallScreen:Lcom/android/phone/InCallScreen;
 
     invoke-virtual {v0, p1}, Lcom/android/phone/InCallScreen;->handleOnscreenButtonClick(I)V
 
-    .line 1682
+    .line 1686
     return-void
 .end method
 
@@ -1833,7 +1833,7 @@
     .registers 2
 
     .prologue
-    .line 1709
+    .line 1713
     invoke-virtual {p0}, Lcom/android/phone/InCallTouchUi;->getUiScreen()Landroid/app/Activity;
 
     move-result-object v0
@@ -1853,7 +1853,7 @@
     .registers 2
 
     .prologue
-    .line 1685
+    .line 1689
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mInCallScreen:Lcom/android/phone/InCallScreen;
 
     invoke-virtual {v0}, Lcom/android/phone/InCallScreen;->okToShowInCallTouchUi()Z
@@ -2425,17 +2425,17 @@
     .prologue
     const/4 v3, 0x0
 
-    .line 1557
+    .line 1561
     invoke-virtual {p0}, Lcom/android/phone/InCallTouchUi;->getUiScreen()Landroid/app/Activity;
 
     move-result-object v0
 
     if-eqz v0, :cond_25
 
-    .line 1564
+    .line 1568
     packed-switch p2, :pswitch_data_26
 
-    .line 1582
+    .line 1586
     const-string v0, "InCallTouchUi"
 
     new-instance v1, Ljava/lang/StringBuilder;
@@ -2458,15 +2458,15 @@
 
     invoke-static {v0, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 1592
+    .line 1596
     :pswitch_22
     invoke-virtual {p0, v3, v3}, Lcom/android/phone/InCallTouchUi;->updateIncomingCallWidgetHint(II)V
 
-    .line 1596
+    .line 1600
     :cond_25
     return-void
 
-    .line 1564
+    .line 1568
     :pswitch_data_26
     .packed-switch 0x0
         :pswitch_22
@@ -2478,7 +2478,7 @@
     .registers 1
 
     .prologue
-    .line 1609
+    .line 1613
     return-void
 .end method
 
@@ -2914,7 +2914,7 @@
     .parameter "newMode"
 
     .prologue
-    .line 1705
+    .line 1709
     invoke-virtual {p0}, Lcom/android/phone/InCallTouchUi;->getUiScreen()Landroid/app/Activity;
 
     move-result-object v0
@@ -2925,7 +2925,7 @@
 
     invoke-virtual {v0, p1}, Lcom/android/phone/InCallScreen;->switchInCallAudio(Lcom/android/phone/InCallScreen$InCallAudioMode;)V
 
-    .line 1706
+    .line 1710
     return-void
 .end method
 
@@ -2933,7 +2933,7 @@
     .registers 2
 
     .prologue
-    .line 1701
+    .line 1705
     invoke-virtual {p0}, Lcom/android/phone/InCallTouchUi;->getUiScreen()Landroid/app/Activity;
 
     move-result-object v0
@@ -2944,7 +2944,7 @@
 
     invoke-virtual {v0}, Lcom/android/phone/InCallScreen;->toggleSpeaker()V
 
-    .line 1702
+    .line 1706
     return-void
 .end method
 
@@ -2952,30 +2952,30 @@
     .registers 5
 
     .prologue
-    .line 1621
+    .line 1625
     invoke-virtual {p0}, Lcom/android/phone/InCallTouchUi;->isForegroundActivity()Z
 
     move-result v0
 
     if-nez v0, :cond_c
 
-    .line 1626
+    .line 1630
     const-string v0, "- triggerPing: InCallScreen no longer in foreground; ignoring..."
 
     invoke-direct {p0, v0}, Lcom/android/phone/InCallTouchUi;->log(Ljava/lang/String;)V
 
-    .line 1668
+    .line 1672
     :cond_b
     :goto_b
     return-void
 
-    .line 1630
+    .line 1634
     :cond_c
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     if-nez v0, :cond_18
 
-    .line 1633
+    .line 1637
     const-string v0, "InCallTouchUi"
 
     const-string v1, "- triggerPing: null mIncomingCallWidget!"
@@ -2984,7 +2984,7 @@
 
     goto :goto_b
 
-    .line 1638
+    .line 1642
     :cond_18
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
@@ -2994,12 +2994,12 @@
 
     if-nez v0, :cond_b
 
-    .line 1645
+    .line 1649
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mIncomingCallWidget:Lcom/android/phone/multiwaveview/GlowPadView;
 
     invoke-virtual {v0}, Lcom/android/phone/multiwaveview/GlowPadView;->ping()V
 
-    .line 1665
+    .line 1669
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mHandler:Landroid/os/Handler;
 
     const/16 v1, 0x65
@@ -3019,12 +3019,12 @@
     .prologue
     const/4 v1, 0x0
 
-    .line 1693
+    .line 1697
     iget-object v0, p0, Lcom/android/phone/InCallTouchUi;->mInCallScreen:Lcom/android/phone/InCallScreen;
 
     invoke-virtual {v0, v1, v1}, Lcom/android/phone/InCallScreen;->updateIncomingCallWidgetHint(II)V
 
-    .line 1694
+    .line 1698
     return-void
 .end method
 
