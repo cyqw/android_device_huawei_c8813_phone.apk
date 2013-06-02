@@ -510,6 +510,11 @@
 
     invoke-virtual {v1, v2, v3}, Landroid/os/SystemVibrator;->vibrate(J)V
 
+    iget-object p1, p0, Lcom/android/phone/InCallScreen$1;->this$0:Lcom/android/phone/InCallScreen;
+
+    #calls: Lcom/android/phone/InCallScreen;->voiceRecordClick()V
+    invoke-static {p1}, Lcom/android/phone/InCallScreen;->access$6200(Lcom/android/phone/InCallScreen;)V
+
     .line 610
     :cond_193
     iget-object v1, p0, Lcom/android/phone/InCallScreen$1;->this$0:Lcom/android/phone/InCallScreen;

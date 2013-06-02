@@ -538,6 +538,17 @@
     return-void
 .end method
 
+.method static synthetic access$6200(Lcom/android/phone/InCallScreen;)V
+    .registers 1
+    .parameter "x0"
+
+    .prologue
+    .line 168
+    invoke-direct {p0}, Lcom/android/phone/InCallScreen;->voiceRecordClick()V
+
+    return-void
+.end method
+
 .method static synthetic access$700(Lcom/android/phone/InCallScreen;Lcom/android/internal/telephony/MmiCode;)V
     .registers 2
     .parameter "x0"
@@ -4265,7 +4276,7 @@
 .end method
 
 .method private onPhoneStateChanged(Landroid/os/AsyncResult;)V
-    .registers 4
+    .registers 11
     .parameter
 
     .prologue
@@ -4276,7 +4287,43 @@
 
     move-result-object v0
 
+    .line 2106
+    sget-object v1, Lcom/android/internal/telephony/Phone$State;->OFFHOOK:Lcom/android/internal/telephony/Phone$State;
+
+    .line 2107
+    if-ne v0, v1, :cond_30
+
+    iget-object v1, p0, Lcom/android/phone/InCallScreen;->mCM:Lcom/android/internal/telephony/CallManager;
+
+    invoke-virtual {v1}, Lcom/android/internal/telephony/CallManager;->getActiveFgCall()Lcom/android/internal/telephony/Call;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_30
+
+    invoke-virtual {v1}, Lcom/android/internal/telephony/Call;->getEarliestConnection()Lcom/android/internal/telephony/Connection;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_30
+
+    invoke-virtual {v1}, Lcom/android/internal/telephony/Connection;->isIncoming()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_30
+    iget-object v2, p0, Lcom/android/phone/InCallScreen;->mRecorder:Landroid/media/voicerecorder/BaseVoiceRecorder;
+
+    invoke-virtual {v2}, Landroid/media/voicerecorder/BaseVoiceRecorder;->isRecording()Z
+
+    move-result v2
+
+    if-nez v2, :cond_30
+
+    invoke-direct {p0}, Lcom/android/phone/InCallScreen;->voiceRecordClick()V
+
     .line 2110
+    :cond_30
     iget-boolean v1, p0, Lcom/android/phone/InCallScreen;->mIsForegroundActivity:Z
 
     if-nez v1, :cond_14
@@ -11245,12 +11292,6 @@
 
     .line 5674
     :cond_60
-    const/16 v0, 0x23
-
-    invoke-direct {p0, v0}, Lcom/android/phone/InCallScreen;->startTone(C)V
-
-    .line 5675
-    invoke-direct {p0}, Lcom/android/phone/InCallScreen;->stopTone()V
 
     goto :goto_46
 
